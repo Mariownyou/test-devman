@@ -1,0 +1,8 @@
+.DS_Store
+.idea
+*.log
+tmp/
+
+pyrightconfig.json
+db.sqlite3
+venv/
