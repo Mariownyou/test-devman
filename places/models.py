@@ -10,3 +10,12 @@ class Place(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class PlaceImage(models.Model):
+    image = models.ImageField(upload_to='images/')
+    position = models.PositiveIntegerField()
+    place = models.ForeignKey(Place, verbose_name='images', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.position} {self.place}'  # we could return self.place.title but str(self.place) will already returb this
