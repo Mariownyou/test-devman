@@ -99,3 +99,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
+
+MEDIA_ROOT = 'media'
+MEDIA_URL = '/media/'
