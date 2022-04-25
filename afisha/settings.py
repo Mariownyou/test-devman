@@ -67,10 +67,6 @@ TEMPLATES = [
     },
 ]
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    '/var/www/static/',
-]
 
 WSGI_APPLICATION = 'afisha.wsgi.application'
 
@@ -110,6 +106,10 @@ USE_L10N = True
 USE_TZ = True
 
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    # '/var/www/static/',
+]
 STATIC_URL = env('STATIC_URL', '/static/')
 STATIC_ROOT = env('STATIC_ROOT', 'staticfiles')
 
