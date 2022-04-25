@@ -1,4 +1,4 @@
-![Demo](demo.gif [Project Demo](http://mariownyou.pythonanywhere.com))
+![Demo](demo.gif "http://mariownyou.pythonanywhere.com")
 
 # Тестовое задание в devman
 1. Соеденить существующий frontend с django проектом
@@ -14,7 +14,7 @@
 Не совсем понятно что требуется сделать (отсортировать или задать порядок относительно модели Place)
 
 
-### Переменные окружения
+### Переменные окружения и запуск локально
 Создайте `.env` в корне проекта и задайте следющие переменные:
 
 ```bash
@@ -22,6 +22,19 @@ SECRET_KEY='some secure key'
 ALLOWED_HOSTS='*'
 DEBUG=true
 ```
+
+
+
+Создайте виртуально окружение и установите зависимости
+
+``` bash
+python3 -m venv venv
+source venv/bin/activate
+
+pip install -r requirements.txt
+```
+
+`
 
 
 ### load_place и пример json файла
