@@ -1,4 +1,5 @@
-![Demo](demo.gif "http://mariownyou.pythonanywhere.com")
+![Demo](demo.gif)
+[Project Demo](http://mariownyou.pythonanywhere.com)
 
 # Тестовое задание в devman
 1. Соеденить существующий frontend с django проектом
@@ -34,7 +35,6 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-`
 
 
 ### load_place и пример json файла
