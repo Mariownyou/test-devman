@@ -27,7 +27,7 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
 
 
 class CustomSortableAdminMixin(SortableAdminMixin):
-    """ Removes sorting for Place model """
+    """ Removes sorting for Place model because we don't need it"""
 
     def get_list_display(self, request):
         list_display = list(super().get_list_display(request))

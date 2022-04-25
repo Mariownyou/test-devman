@@ -9,10 +9,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = env('SECRET_KEY')
 
-DEBUG = env.bool('DEBUG', False)
+DEBUG = env.bool('DEBUG', True)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', ['*'])
 
+# Prod settings
 SESSION_COOKIE_SECURE = env.bool('SESSION_COOKIE_SECURE', False)
 CSRF_COOKIE_SECURE = env.bool('CSRF_COOKIE_SECURE', False)
 SECURE_SSL_REDIRECT = env.bool('SECURE_SSL_REDIRECT', False)
