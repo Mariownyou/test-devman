@@ -31,9 +31,13 @@ class CustomSortableAdminMixin(SortableAdminMixin):
 
     def get_list_display(self, request):
         list_display = list(super().get_list_display(request))
-        order_field = '_reorder_'
+        order_field = '_reorder_'  # for django 4
+        old_field = '_reorder'  # for django 3
         if order_field in list_display:
             i = list_display.index(order_field)
+            list_display.pop(i)
+        if old_field in list_display:
+            i = list_display.index(old_field)
             list_display.pop(i)
         return list_display
 

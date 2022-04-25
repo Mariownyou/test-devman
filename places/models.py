@@ -6,8 +6,8 @@ class Place(models.Model):
     title = models.CharField(max_length=255)
     description_short = models.CharField(max_length=255)
     description_long = HTMLField()
-    lng = models.DecimalField(max_digits=9, decimal_places=6)
-    lat = models.DecimalField(max_digits=9, decimal_places=6)
+    lng = models.DecimalField(max_digits=17, decimal_places=14)
+    lat = models.DecimalField(max_digits=17, decimal_places=14)
     position = models.PositiveIntegerField(
         default=0,
         blank=False,
