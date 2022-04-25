@@ -110,8 +110,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     # '/var/www/static/',
 ]
-STATIC_URL = env('STATIC_URL', '/static/')
-STATIC_ROOT = env('STATIC_ROOT', 'staticfiles')
+STATIC_URL = env('STATIC_URL', '/staticfiles/')
+# STATIC_ROOT = env('STATIC_ROOT', 'staticfiles')
+STATIC_ROOT = env('STATIC_ROOT', os.path.join(BASE_DIR, 'staticfiles'))
 
-MEDIA_ROOT = env('MEDIA_ROOT', 'media')
+# MEDIA_ROOT = env('MEDIA_ROOT', 'media')
 MEDIA_URL = env('MEDIA_URL', '/media/')
+MEDIA_ROOT = env('MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
