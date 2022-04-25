@@ -13,7 +13,7 @@ def get_place(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
 
     images = []
-    for image in place.images.all():
+    for image in place.images.order_by('position').all():
         images.append(str(image.image.url))
 
     place_data = {

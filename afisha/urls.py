@@ -23,6 +23,6 @@ from places.views import home, get_place
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('places/<int:place_id>/', get_place),
+    path('places/<int:place_id>/', get_place, name='place_details'),
     path('', home, name='home'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

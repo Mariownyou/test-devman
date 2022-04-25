@@ -53,7 +53,7 @@
           "properties": {
             "title": "{{ place.title }}",
             "placeId": "{{ place.id }}",
-            "detailsUrl": "{% static './places/moscow_legends.json' %}"
+            "detailsUrl": "{% url 'place_details' place.id %}"
           }
         {% if forloop.last %}
         }
