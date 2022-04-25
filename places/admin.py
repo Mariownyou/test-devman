@@ -47,5 +47,9 @@ class PlaceAdmin(CustomSortableAdminMixin, admin.ModelAdmin):
     list_display = ('title',)
 
 
+class PlaceImageAdmin(admin.ModelAdmin):
+    ordering = ('place',)
+
+
 admin.site.register(Place, PlaceAdmin)
-admin.site.register(PlaceImage)
+admin.site.register(PlaceImage, PlaceImageAdmin)
