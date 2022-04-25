@@ -1,13 +1,23 @@
 import os
+from environs import Env
+
+env = Env()
+env.read_env()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-SECRET_KEY = 'xtj=pck^bc7bcfw!4cr2@qvrf_0u)g7y=+4$$vtjhz0^cxx(n%'
+SECRET_KEY = env('SECRET_KEY')
 
-DEBUG = True
+DEBUG = env.bool('DEBUG', False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+
+SESSION_COOKIE_SECURE = env.bool('SESSION_COOKIE_SECURE', False)
+CSRF_COOKIE_SECURE = env.bool('CSRF_COOKIE_SECURE', False)
+SECURE_SSL_REDIRECT = env.bool('SECURE_SSL_REDIRECT', False)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool('SECURE_HSTS_INCLUDE_SUBDOMAINS', False)
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -100,8 +110,8 @@ USE_L10N = True
 USE_TZ = True
 
 
-STATIC_URL = '/static/'
-STATIC_ROOT = 'staticfiles'
+STATIC_URL = env('STATIC_URL', '/static/')
+STATIC_ROOT = env('STATIC_ROOT', 'staticfiles')
 
-MEDIA_ROOT = 'media'
-MEDIA_URL = '/media/'
+MEDIA_ROOT = env('MEDIA_ROOT', 'media')
+MEDIA_URL = env('MEDIA_URL', '/media/')
