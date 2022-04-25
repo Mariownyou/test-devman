@@ -22,6 +22,12 @@
 SECRET_KEY='some secure key'
 ALLOWED_HOSTS='*'
 DEBUG=true
+
+# вы также можете указать и другие необходимые переменные
+SESSION_COOKIE_SECURE=false
+CSRF_COOKIE_SECURE=false
+SECURE_SSL_REDIRECT=false
+SECURE_HSTS_INCLUDE_SUBDOMAINS=false
 ```
 
 
