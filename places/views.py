@@ -14,7 +14,7 @@ def get_place(request, place_id):
 
     images = []
     for image in place.images.order_by('position').all():
-        images.append(str(image.image.url))
+        images.append(image.image.url)
 
     place_data = {
         'title': place.title,
