@@ -11,7 +11,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = env.bool('DEBUG', True)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', ['*'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', ['localhost', '127.0.0.1'])
 
 # Prod settings
 SESSION_COOKIE_SECURE = env.bool('SESSION_COOKIE_SECURE', False)
@@ -58,12 +58,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-            # 'loaders': [
-            #     ('django.template.loaders.cached.Loader', [
-            #         'django.template.loaders.filesystem.Loader',
-            #         'django.template.loaders.app_directories.Loader',
-            #     ]),
-            # ],
         },
     },
 ]
@@ -109,12 +103,9 @@ USE_TZ = True
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    # '/var/www/static/',
 ]
 STATIC_URL = env('STATIC_URL', '/staticfiles/')
-# STATIC_ROOT = env('STATIC_ROOT', 'staticfiles')
 STATIC_ROOT = env('STATIC_ROOT', os.path.join(BASE_DIR, 'staticfiles'))
 
-# MEDIA_ROOT = env('MEDIA_ROOT', 'media')
 MEDIA_URL = env('MEDIA_URL', '/media/')
 MEDIA_ROOT = env('MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))

@@ -14,22 +14,32 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         file_link = options['file_link']
         response = requests.get(file_link)
-        place_data = response.json()
-        new_place, created = Place.objects.get_or_create(
-            title=place_data['title'],
-            description_short=place_data['description_short'],
-            description_long=place_data['description_long'],
-            lng=place_data['coordinates']['lng'],
-            lat=place_data['coordinates']['lat']
+        if response.status_code != 200:
+            self.stdout.write(self.style.ERROR(f'Could not load file\n{response.text}'))
+            return
+        raw_place = response.json()
+        place, created = Place.objects.update_or_create(
+            title=raw_place['title'],
+            defaults=dict(
+                description_short=raw_place['description_short'],
+                description_long=raw_place['description_long'],
+                lng=raw_place['coordinates']['lng'],
+                lat=raw_place['coordinates']['lat']
+            )
         )
 
-        if created:
-            for position, image_url in enumerate(place_data['imgs']):
-                try:
-                    raw_image = requests.get(image_url)
-                    content = ContentFile(raw_image.content)
-                    instance = PlaceImage.objects.create(place=new_place, position=position)
-                    instance.image.save(image_url.split('/')[-1], content, save=True)
-                except Exception as e:
-                    self.stdout.write(self.style.ERROR(f'{e}'))
+        if not created:
+            self.stdout.write(self.style.SUCCESS('Suceccfuly added place'))
+            return
+        for position, image_url in enumerate(raw_place['imgs']):
+            try:
+                raw_image = requests.get(image_url)
+                if raw_image.status_code != 200:
+                    self.stdout.write(self.style.ERROR(f'Could not load image\n{raw_image.text}'))
+                    return
+                content = ContentFile(raw_image.content)
+                instance = PlaceImage.objects.create(place=place, position=position)
+                instance.image.save(image_url.split('/')[-1], content, save=True)
+            except Exception as e:
+                self.stdout.write(self.style.ERROR(f'{e}'))
         self.stdout.write(self.style.SUCCESS('Suceccfuly added place'))

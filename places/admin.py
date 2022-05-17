@@ -14,15 +14,11 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     extra = 1
 
     def place_image(self, obj):
-        height = obj.image.height
-        if height > 200:
-            height = 200
-
-        return format_html('<img src="{url}" width="{width}" height={height} />'.format(
-            url=obj.image.url,
-            width='auto',
-            height=height
-            )
+        return format_html(
+            '<img src="{}" width="{}" height={}px />',
+            obj.image.url,
+            'auto',
+            200 if obj.image.height > 200 else obj.image.height
         )
 
 
@@ -32,13 +28,12 @@ class CustomSortableAdminMixin(SortableAdminMixin):
     def get_list_display(self, request):
         list_display = list(super().get_list_display(request))
         order_field = '_reorder_'  # for django 4
-        old_field = '_reorder'  # for django 3
+        old_order_field = '_reorder'  # for django 3
         if order_field in list_display:
-            i = list_display.index(order_field)
-            list_display.pop(i)
-        if old_field in list_display:
-            i = list_display.index(old_field)
-            list_display.pop(i)
+            index_field = list_display.index(order_field)
+        if old_order_field in list_display:
+            index_field = list_display.index(old_order_field)
+        list_display.pop(index_field)
         return list_display
 
 
