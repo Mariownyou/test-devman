@@ -15,10 +15,9 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
 
     def place_image(self, obj):
         return format_html(
-            '<img src="{}" width="{}" height={}px />',
+            '<img src="{}" width="auto" max-height={}px />',
             obj.image.url,
-            'auto',
-            200 if obj.image.height > 200 else obj.image.height
+            200
         )
 
 
@@ -40,10 +39,12 @@ class CustomSortableAdminMixin(SortableAdminMixin):
 class PlaceAdmin(CustomSortableAdminMixin, admin.ModelAdmin):
     inlines = (ImageInline,)
     list_display = ('title',)
+    search_fields = ('title',)
 
 
 class PlaceImageAdmin(admin.ModelAdmin):
     ordering = ('place',)
+    autocomplete_fields = ('place',)
 
 
 admin.site.register(Place, PlaceAdmin)
